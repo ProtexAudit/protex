@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PROTEX | Scan Contract</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+        <img src="logo.png" class="logo">
+        <h1>PROTEX</h1>
+        <a href="index.html" class="nav-btn">Home</a>
+    </div>
+</header>
+
+<section class="scan-section">
+    <h2>Smart Contract Scanner</h2>
+
+    <input type="text" id="contract" placeholder="Enter Contract Address">
+
+    <select id="chain">
+        <option>Ethereum</option>
+        <option>BSC</option>
+        <option>Polygon</option>
+        <option>Solana</option>
+        <option>Arbitrum</option>
+        <option>Base</option>
+    </select>
+
+    <button onclick="analyze()" class="btn">Analyze</button>
+
+    <div id="result" class="result-box"></div>
+</section>
+
+<footer>
+    <p>© 2026 PROTEX Security Engine</p>
+</footer>
+
+</body>
+</html>
