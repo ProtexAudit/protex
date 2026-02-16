@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0B0B0B;
+    color: white;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+header {
+    padding: 20px 0;
+    background: linear-gradient(to right, #111, #1a1a1a);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 70px;
+}
+
+h1 {
+    color: #D4AF37;
+    letter-spacing: 3px;
+}
+
+.nav-btn {
+    color: #D4AF37;
+    text-decoration: none;
+    border: 1px solid #D4AF37;
+    padding: 8px 20px;
+    border-radius: 5px;
+}
+
+.hero {
+    text-align: center;
+    margin-top: 120px;
+}
+
+.hero h2 {
+    font-size: 40px;
+    color: #F5D76E;
+}
+
+.btn {
+    background: #D4AF37;
+    color: black;
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.features {
+    margin-top: 150px;
+    text-align: center;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    background: #111;
+    padding: 25px;
+    border-radius: 10px;
+    width: 250px;
+    border: 1px solid #D4AF37;
+}
+
+.scan-section {
+    text-align: center;
+    margin-top: 100px;
+}
+
+input, select {
+    padding: 12px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 6px;
+    border: none;
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #D4AF37;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
