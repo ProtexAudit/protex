@@ -333,3 +333,63 @@
   40%  { transform: translateX(2px);  filter: brightness(1); }
   100% { transform: translateX(0);    filter: none; }
 }
+
+/* ============================================================
+   PROTEX — Background Integration
+   Glassmorphism cards to show animated background
+   ============================================================ */
+
+/* Make body/shell transparent */
+body { background: #050505 !important; }
+.app-shell { background: transparent !important; }
+
+/* Glassmorphism on all cards */
+.stat-card,
+.result-card,
+.history-item,
+.agent-status,
+.dashboard__chart-card,
+.dashboard__kpi-card,
+.scan-progress,
+.extracted-text,
+.screenshot-preview {
+  background: rgba(14, 14, 14, 0.82) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Header glass */
+.app-header {
+  background: rgba(8, 8, 8, 0.88) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Tab bar glass */
+.tab-bar {
+  background: rgba(10, 10, 10, 0.85) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Typing + ticker glass */
+.typing-agent,
+.threat-ticker {
+  background: rgba(8, 8, 8, 0.7) !important;
+  backdrop-filter: blur(6px);
+}
+
+/* Textarea glass */
+.scan-textarea {
+  background: rgba(8, 8, 8, 0.75) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Sidebar glass */
+.app-sidebar .agent-status {
+  background: rgba(14,14,14,0.85) !important;
+}
+
+/* Scan panel subtle glass */
+.scan-panel {
+  position: relative;
+}

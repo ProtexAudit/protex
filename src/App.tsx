@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import '@/styles/globals.css'
 import '@/styles/enhanced.css'
 import '@/styles/agent.css'
+import { AgentBackground } from '@/components/AgentBackground'
 
 const AGENT_MESSAGES = [
   'Neural threat engine active...',
@@ -133,6 +134,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <AgentBackground />
       <Toaster position="top-right" />
       <Header />
       <TypingAgent />
