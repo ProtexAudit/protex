@@ -1,14 +1,13 @@
 // ============================================================
-// PROTEX — ScanPanel Component
-// Main interaction panel for each scan mode
+// PROTEX — ScanPanel v1.2
+// Added: Animated progress bar + CRITICAL glitch effect
 // ============================================================
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useScan }         from '@/hooks/useScan'
-import { useProtexStore }  from '@/services/store'
-import { ResultCard }      from './ResultCard'
-import { LoadingSpinner }  from './LoadingSpinner'
+import { useScan }           from '@/hooks/useScan'
+import { useProtexStore }    from '@/services/store'
+import { ResultCard }        from './ResultCard'
 import { getPresetsForMode } from '@/utils/presets'
 import type { ScanMode } from '@/types'
 
@@ -24,35 +23,111 @@ const BUTTON_LABELS: Record<ScanMode, string> = {
   social: '⬡ DETECT TACTICS',
 }
 
-interface ScanPanelProps {
-  mode: ScanMode
+// ── Progress steps shown during scan ─────────────────────────
+const PROGRESS_STEPS = [
+  { pct: 15, label: 'Initializing neural engine...'   },
+  { pct: 30, label: 'Tokenizing input patterns...'    },
+  { pct: 50, label: 'Querying Hermes-4-70B...'        },
+  { pct: 70, label: 'Analyzing threat vectors...'     },
+  { pct: 88, label: 'Calculating risk score...'       },
+  { pct: 97, label: 'Generating recommendations...'   },
+]
+
+// ── Animated Progress Bar ─────────────────────────────────────
+function ScanProgress({ isScanning }: { isScanning: boolean }) {
+  const [step, setStep]       = useState(0)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    if (!isScanning) {
+      setStep(0)
+      setProgress(0)
+      return
+    }
+    setStep(0)
+    setProgress(0)
+
+    const intervals: ReturnType<typeof setTimeout>[] = []
+    PROGRESS_STEPS.forEach((s, i) => {
+      const t = setTimeout(() => {
+        setStep(i)
+        setProgress(s.pct)
+      }, i * 600)
+      intervals.push(t)
+    })
+    return () => intervals.forEach(clearTimeout)
+  }, [isScanning])
+
+  if (!isScanning) return null
+
+  const current = PROGRESS_STEPS[step]
+
+  return (
+    <motion.div
+      className="scan-progress"
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="scan-progress__header">
+        <span className="scan-progress__label">{current?.label ?? 'Processing...'}</span>
+        <span className="scan-progress__pct">{progress}%</span>
+      </div>
+      <div className="scan-progress__track">
+        <motion.div
+          className="scan-progress__fill"
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        />
+        <div className="scan-progress__glow" style={{ left: `${progress}%` }} />
+      </div>
+      <div className="scan-progress__steps">
+        {PROGRESS_STEPS.map((s, i) => (
+          <div
+            key={i}
+            className={`scan-progress__dot ${i <= step ? 'scan-progress__dot--active' : ''}`}
+          />
+        ))}
+      </div>
+    </motion.div>
+  )
 }
 
+// ── Main ScanPanel ────────────────────────────────────────────
+interface ScanPanelProps { mode: ScanMode }
+
 export function ScanPanel({ mode }: ScanPanelProps) {
-  const [input, setInput] = useState('')
+  const [input, setInput]   = useState('')
   const { scan, isScanning, result, error } = useScan(mode)
   const setStoreInput = useProtexStore(s => s.setInput)
-  const presets = getPresetsForMode(mode)
+  const presets       = getPresetsForMode(mode)
+
+  const isCritical = result?.riskLevel === 'CRITICAL'
 
   function handleInput(value: string) {
     setInput(value)
     setStoreInput(mode, value)
   }
 
-  function handlePreset(content: string) {
-    handleInput(content)
-  }
-
   return (
-    <div className="scan-panel">
+    <div className={`scan-panel ${isCritical ? 'scan-panel--critical' : ''}`}>
+
+      {/* CRITICAL glitch overlay */}
+      <AnimatePresence>
+        {isCritical && (
+          <motion.div
+            className="critical-flash"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.15, 0, 0.1, 0] }}
+            transition={{ duration: 0.6, times: [0, 0.2, 0.4, 0.7, 1] }}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Presets */}
       <div className="presets-row">
         {presets.map(preset => (
-          <button
-            key={preset.label}
-            className="preset-chip"
-            onClick={() => handlePreset(preset.content)}
-          >
+          <button key={preset.label} className="preset-chip" onClick={() => handleInput(preset.content)}>
             {preset.icon} {preset.label}
           </button>
         ))}
@@ -74,24 +149,26 @@ export function ScanPanel({ mode }: ScanPanelProps) {
       <div className="btn-row">
         <span className="char-count">{input.length} / 5000</span>
         <button
-          className="scan-btn"
+          className={`scan-btn ${isScanning ? 'scan-btn--scanning' : ''}`}
           onClick={() => scan(input)}
           disabled={isScanning || !input.trim()}
         >
-          {isScanning ? <LoadingSpinner size={16} /> : null}
-          {isScanning ? 'SCANNING...' : BUTTON_LABELS[mode]}
+          {isScanning
+            ? <><span className="scan-btn__pulse" />SCANNING...</>
+            : BUTTON_LABELS[mode]
+          }
         </button>
       </div>
+
+      {/* Progress Bar */}
+      <AnimatePresence>
+        {isScanning && <ScanProgress isScanning={isScanning} />}
+      </AnimatePresence>
 
       {/* Error */}
       <AnimatePresence>
         {error && (
-          <motion.div
-            className="error-banner"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-          >
+          <motion.div className="error-banner" initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} exit={{opacity:0}}>
             ⚠ {error}
           </motion.div>
         )}
@@ -105,6 +182,7 @@ export function ScanPanel({ mode }: ScanPanelProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
+            className={isCritical ? 'result-critical-wrap' : ''}
           >
             <ResultCard result={result} />
           </motion.div>

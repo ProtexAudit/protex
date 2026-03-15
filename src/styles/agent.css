@@ -176,3 +176,160 @@
   .app-sidebar { display: none; }
   .app-body    { display: block; }
 }
+
+/* ============================================================
+   PROTEX — Scan Progress Bar + CRITICAL Glitch Effect
+   ============================================================ */
+
+/* ── Scan Progress Bar ───────────────────────────────────────── */
+.scan-progress {
+  background: var(--bg2);
+  border: 1px solid var(--br);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+
+.scan-progress__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.scan-progress__label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.scan-progress__pct {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold-b);
+}
+
+.scan-progress__track {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: visible;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.scan-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-d), var(--gold-b));
+  border-radius: 3px;
+  position: relative;
+}
+
+.scan-progress__glow {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--gold-b);
+  border-radius: 50%;
+  box-shadow: 0 0 8px 3px rgba(240,192,64,0.6);
+  animation: glow-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  50%       { transform: translate(-50%, -50%) scale(1.4); opacity: 0.7; }
+}
+
+.scan-progress__steps {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.scan-progress__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--td);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.scan-progress__dot--active {
+  background: var(--gold-b);
+  transform: scale(1.3);
+}
+
+/* ── Scan Button Scanning State ──────────────────────────────── */
+.scan-btn--scanning {
+  background: #4A3A10 !important;
+  color: var(--gold) !important;
+  cursor: not-allowed;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-btn--scanning::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(240,192,64,0.15), transparent);
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  to { left: 100%; }
+}
+
+.scan-btn__pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 8px;
+  animation: pulse-btn 1s ease-in-out infinite;
+}
+
+@keyframes pulse-btn {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ── CRITICAL Glitch Effect ──────────────────────────────────── */
+.scan-panel--critical {
+  animation: critical-border 0.5s ease-out;
+}
+
+@keyframes critical-border {
+  0%   { box-shadow: none; }
+  20%  { box-shadow: 0 0 0 2px rgba(229,69,58,0.8), 0 0 20px rgba(229,69,58,0.3); }
+  40%  { box-shadow: 0 0 0 1px rgba(229,69,58,0.4); }
+  60%  { box-shadow: 0 0 0 2px rgba(229,69,58,0.6), 0 0 30px rgba(229,69,58,0.2); }
+  100% { box-shadow: none; }
+}
+
+.critical-flash {
+  position: fixed;
+  inset: 0;
+  background: var(--red);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.result-critical-wrap {
+  animation: glitch-in 0.4s ease-out;
+}
+
+@keyframes glitch-in {
+  0%   { transform: translateX(0);    filter: none; }
+  10%  { transform: translateX(-4px); filter: brightness(1.5); }
+  20%  { transform: translateX(4px);  filter: brightness(0.8); }
+  30%  { transform: translateX(-2px); filter: brightness(1.3); }
+  40%  { transform: translateX(2px);  filter: brightness(1); }
+  100% { transform: translateX(0);    filter: none; }
+}
