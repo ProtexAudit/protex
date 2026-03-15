@@ -1,0 +1,178 @@
+/* ============================================================
+   PROTEX — Agent CSS v1.2
+   Typing animation · Live ticker · Status sidebar
+   ============================================================ */
+
+/* ── App Layout: sidebar + content ──────────────────────────── */
+.app-body {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.app-sidebar {
+  width: 180px;
+  flex-shrink: 0;
+  padding: 16px 0 16px 16px;
+  position: sticky;
+  top: 0;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-title {
+  font-family: var(--head);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--td);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--br);
+}
+
+/* ── Agent Status ────────────────────────────────────────────── */
+.agent-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg2);
+  border: 1px solid var(--br);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+}
+
+.agent-status__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.agent-status__label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--td);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.agent-status__val {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.agent-status__val--live {
+  color: var(--grn);
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ── Typing Animation ────────────────────────────────────────── */
+.typing-agent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px;
+  background: rgba(201, 168, 76, 0.04);
+  border-bottom: 1px solid var(--br);
+  min-height: 32px;
+}
+
+.typing-agent__prefix {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.typing-agent__text {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ts);
+  letter-spacing: 0.5px;
+}
+
+.typing-agent__cursor {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Live Threat Ticker ──────────────────────────────────────── */
+.threat-ticker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 24px;
+  background: rgba(229, 69, 58, 0.04);
+  border-bottom: 1px solid var(--br);
+  overflow: hidden;
+  min-height: 30px;
+}
+
+.threat-ticker__label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--td);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.threat-ticker__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.threat-ticker__type {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.threat-ticker__text {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ts);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.threat-ticker__ago {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--td);
+  flex-shrink: 0;
+}
+
+/* ── Responsive: hide sidebar on mobile ──────────────────────── */
+@media (max-width: 700px) {
+  .app-sidebar { display: none; }
+  .app-body    { display: block; }
+}
