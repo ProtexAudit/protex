@@ -1,6 +1,5 @@
 // ============================================================
 // PROTEX — App Root (v1.1 Enhanced)
-// Added: Screenshot Scanner + Threat Dashboard
 // ============================================================
 
 import { Toaster }           from 'react-hot-toast'
@@ -8,20 +7,17 @@ import { Header }            from '@/components/Header'
 import { StatCards }         from '@/components/StatCards'
 import { ScanPanel }         from '@/components/ScanPanel'
 import { HistoryPanel }      from '@/components/HistoryPanel'
-import { ScreenshotScanner } from '@/components/ScreenshotScanner'
 import { ThreatDashboard }   from '@/components/ThreatDashboard'
 import { useProtexStore }    from '@/services/store'
 import { motion, AnimatePresence } from 'framer-motion'
 import '@/styles/globals.css'
 import '@/styles/enhanced.css'
 
-type Tab = 'scam' | 'link' | 'social' | 'screenshot' | 'dashboard' | 'history'
 
 const TABS: Array<{ id: Tab; icon: string; label: string }> = [
   { id: 'scam',       icon: '⚠',  label: 'Scam Detect'   },
   { id: 'link',       icon: '🔗', label: 'Link Analyzer'  },
   { id: 'social',     icon: '🎭', label: 'Social Manip'   },
-  { id: 'screenshot', icon: '📸', label: 'Screenshot'     },
   { id: 'dashboard',  icon: '📊', label: 'Dashboard'      },
   { id: 'history',    icon: '📋', label: 'History'        },
 ]
@@ -74,7 +70,6 @@ export default function App() {
             {activeTab === 'scam'       && <ScanPanel mode="scam"   />}
             {activeTab === 'link'       && <ScanPanel mode="link"   />}
             {activeTab === 'social'     && <ScanPanel mode="social" />}
-            {activeTab === 'screenshot' && <ScreenshotScanner />}
             {activeTab === 'dashboard'  && <ThreatDashboard />}
             {activeTab === 'history'    && <HistoryPanel />}
           </motion.div>
