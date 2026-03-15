@@ -10,7 +10,7 @@ const BASE_URL = import.meta.env.VITE_HERMES_BASE_URL ?? 'https://openrouter.ai/
 const API_KEY  = import.meta.env.VITE_OPENROUTER_API_KEY ?? ''
 
 // Vision model — gemini supports images and is free
-const VISION_MODEL = 'google/gemini-2.0-flash-exp:free'
+const VISION_MODEL = 'meta-llama/llama-3.2-11b-vision-instruct:free'
 
 const VISION_SYSTEM = `You are PROTEX, an elite AI cybersecurity agent. 
 The user has uploaded a screenshot of a suspicious message, email, or notification.
