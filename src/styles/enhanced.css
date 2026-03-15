@@ -1,0 +1,85 @@
+/* ============================================================
+   PROTEX — Enhanced CSS v1.1
+   Styles for: ScreenshotScanner + ThreatDashboard
+   ============================================================ */
+
+/* ── Drop Zone ───────────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--br);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--bg3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.drop-zone:hover { border-color: var(--gold); background: var(--gold-g); }
+.drop-zone--active { border-color: var(--gold-b); background: var(--gold-g); }
+.drop-zone__icon { font-size: 40px; }
+.drop-zone__title { font-family: var(--head); font-size: 16px; font-weight: 600; color: var(--tx); letter-spacing: 1px; }
+.drop-zone__sub { font-family: var(--mono); font-size: 12px; color: var(--ts); }
+.drop-zone__hint { font-family: var(--mono); font-size: 11px; color: var(--td); margin-top: 4px; }
+
+/* ── Screenshot Preview ──────────────────────────────────────── */
+.screenshot-preview { border: 1px solid var(--br); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg2); }
+.screenshot-preview__header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--br); }
+.screenshot-preview__name { font-family: var(--mono); font-size: 12px; color: var(--ts); }
+.screenshot-preview__remove { font-family: var(--mono); font-size: 11px; color: var(--red); background: none; border: 1px solid rgba(229,69,58,0.3); border-radius: 3px; padding: 3px 8px; cursor: pointer; transition: all 0.15s; }
+.screenshot-preview__remove:hover { background: rgba(229,69,58,0.1); }
+.screenshot-preview__img { width: 100%; max-height: 320px; object-fit: contain; display: block; padding: 12px; }
+
+/* ── Extracted Text ──────────────────────────────────────────── */
+.extracted-text { background: var(--bg3); border: 1px solid var(--br); border-radius: var(--radius); padding: 12px 14px; margin-top: 12px; }
+.extracted-text__label { font-family: var(--head); font-size: 10px; font-weight: 600; letter-spacing: 2px; color: var(--td); text-transform: uppercase; margin-bottom: 6px; }
+.extracted-text__content { font-family: var(--mono); font-size: 12px; color: var(--ts); line-height: 1.6; white-space: pre-wrap; max-height: 120px; overflow-y: auto; }
+
+/* ── Screenshot Scanner ──────────────────────────────────────── */
+.screenshot-scanner { display: flex; flex-direction: column; gap: 12px; }
+
+/* ── Dashboard ───────────────────────────────────────────────── */
+.dashboard { display: flex; flex-direction: column; gap: 0; }
+
+.dashboard__kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px; }
+@media (max-width: 640px) { .dashboard__kpi-row { grid-template-columns: repeat(3, 1fr); } }
+
+.dashboard__kpi-card { background: var(--bg2); border: 1px solid var(--br); border-radius: var(--radius-lg); padding: 13px 16px; text-align: center; }
+.dashboard__kpi-value { font-family: var(--mono); font-size: 24px; font-weight: 700; line-height: 1; }
+.dashboard__kpi-label { font-family: var(--head); font-size: 10px; letter-spacing: 1px; color: var(--td); text-transform: uppercase; margin-top: 4px; }
+
+.dashboard__charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 600px) { .dashboard__charts-row { grid-template-columns: 1fr; } }
+
+.dashboard__chart-card { background: var(--bg2); border: 1px solid var(--br); border-radius: var(--radius-lg); padding: 16px; }
+.dashboard__chart-title { font-family: var(--head); font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--td); text-transform: uppercase; margin-bottom: 14px; }
+.dashboard__chart-body { display: flex; align-items: center; }
+
+/* ── Legend ──────────────────────────────────────────────────── */
+.dashboard__legend { display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.dashboard__legend-item { display: flex; align-items: center; gap: 8px; }
+.dashboard__legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dashboard__legend-label { font-family: var(--mono); font-size: 11px; color: var(--ts); flex: 1; }
+.dashboard__legend-val { font-family: var(--mono); font-size: 12px; font-weight: 700; }
+
+/* ── Bar Chart ───────────────────────────────────────────────── */
+.bar-chart { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.bar-chart__row { display: flex; align-items: center; gap: 10px; }
+.bar-chart__label { font-family: var(--mono); font-size: 10px; color: var(--ts); min-width: 90px; text-transform: uppercase; letter-spacing: 0.5px; }
+.bar-chart__track { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+.bar-chart__fill { height: 100%; border-radius: 3px; }
+.bar-chart__value { font-family: var(--mono); font-size: 12px; font-weight: 700; min-width: 24px; text-align: right; }
+
+/* ── Tag Cloud ───────────────────────────────────────────────── */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag-cloud__item { font-family: var(--mono); font-size: 11px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(229,69,58,0.4); color: var(--red); background: rgba(229,69,58,0.06); display: flex; align-items: center; gap: 5px; }
+.tag-cloud__count { background: rgba(229,69,58,0.2); border-radius: 2px; padding: 0 4px; font-size: 10px; }
+
+/* ── Chart Empty ─────────────────────────────────────────────── */
+.chart-empty { width: 100%; padding: 24px; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--td); }
+
+/* ── Tab overflow scroll on mobile ──────────────────────────── */
+.tab-bar { overflow-x: auto; scrollbar-width: none; }
+.tab-bar::-webkit-scrollbar { display: none; }
