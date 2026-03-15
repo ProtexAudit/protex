@@ -5,11 +5,11 @@
 ![Protex Banner](https://img.shields.io/badge/PROTEX-AI%20Security%20Agent-C9A84C?style=for-the-badge&logo=shield&logoColor=black)
 ![Hermes-4-70B](https://img.shields.io/badge/Powered%20by-Hermes--4--70B-F0C040?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-3DB87A?style=for-the-badge)
-![Build](https://img.shields.io/github/actions/workflow/status/your-org/protex/ci.yml?style=for-the-badge&label=CI)
+![Live](https://img.shields.io/badge/LIVE-protex--agent.vercel.app-3DB87A?style=for-the-badge&logo=vercel&logoColor=white)
 
 **Real-time scam, phishing & social manipulation detection — powered by NousResearch Hermes-4-70B**
 
-[Live Demo](#) · [Report Bug](#) · [Request Feature](#)
+🌐 **[Live Demo → protex-agent.vercel.app](https://protex-agent.vercel.app)** · 🐦 **[Follow on X → @protex_audit](https://x.com/protex_audit)** · [Report Bug](https://github.com/ProtexAudit/protex/issues) · [Request Feature](https://github.com/ProtexAudit/protex/issues)
 
 </div>
 
@@ -413,6 +413,7 @@ MIT © 2024 Protex Team
 ---
 
 <div align="center">
-  <strong>PROTEX</strong> · Autonomous Digital Protection Agent<br/>
+  <strong>PROTEX</strong> · Autonomous Digital Protection Agent<br/><br/>
+  🌐 <a href="https://protex-agent.vercel.app"><strong>protex-agent.vercel.app</strong></a> · 🐦 <a href="https://x.com/protex_audit"><strong>@protex_audit</strong></a><br/><br/>
   Powered by <a href="https://huggingface.co/NousResearch">NousResearch Hermes-4-70B</a> via <a href="https://openrouter.ai">OpenRouter</a>
 </div>
