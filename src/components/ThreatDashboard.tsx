@@ -14,7 +14,7 @@ function DonutChart({ data }: { data: Array<{ label: string; value: number; colo
   const total = data.reduce((s, d) => s + d.value, 0)
   if (total === 0) return (
     <div className="chart-empty">
-      <span>Belum ada data</span>
+      <span>No data yet</span>
     </div>
   )
 
@@ -91,7 +91,7 @@ function BarChart({ data }: { data: Array<{ label: string; value: number; color:
 // ── Threat Tag Cloud ──────────────────────────────────────────
 function TagCloud({ tags }: { tags: Array<{ tag: string; count: number }> }) {
   if (tags.length === 0) return (
-    <div className="chart-empty"><span>Belum ada ancaman terdeteksi</span></div>
+    <div className="chart-empty"><span>No threats detected yet</span></div>
   )
 
   const max = Math.max(...tags.map(t => t.count), 1)
@@ -181,8 +181,8 @@ export function ThreatDashboard() {
       <div className="dashboard__kpi-row">
         {[
           { label: 'Total Scans',    value: stats.totalScans,      color: '#C9A84C' },
-          { label: 'Ancaman',        value: stats.threatsDetected, color: '#E5453A' },
-          { label: 'Aman',           value: stats.safeItems,       color: '#3DB87A' },
+          { label: 'Threats',        value: stats.threatsDetected, color: '#E5453A' },
+          { label: 'Safe',           value: stats.safeItems,       color: '#3DB87A' },
           { label: 'Critical',       value: stats.criticalAlerts,  color: '#E5453A' },
           { label: 'Threat Rate',    value: `${threatRate}%`,      color: '#E89B2A' },
         ].map((kpi, i) => (
@@ -204,7 +204,7 @@ export function ThreatDashboard() {
 
         {/* Donut — Risk Distribution */}
         <div className="dashboard__chart-card">
-          <div className="dashboard__chart-title">DISTRIBUSI RISIKO</div>
+          <div className="dashboard__chart-title">RISK DISTRIBUTION</div>
           <div className="dashboard__chart-body" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <DonutChart data={riskDist} />
             <div className="dashboard__legend">
@@ -221,7 +221,7 @@ export function ThreatDashboard() {
 
         {/* Bar — Scan Mode */}
         <div className="dashboard__chart-card">
-          <div className="dashboard__chart-title">JENIS SCAN</div>
+          <div className="dashboard__chart-title">SCAN TYPES</div>
           <div className="dashboard__chart-body">
             <BarChart data={modeDist} />
           </div>
@@ -232,7 +232,7 @@ export function ThreatDashboard() {
       {/* Risk Score Trend */}
       {recentScores.length > 0 && (
         <div className="dashboard__chart-card" style={{ marginTop: 14 }}>
-          <div className="dashboard__chart-title">SKOR RISIKO TERBARU</div>
+          <div className="dashboard__chart-title">RECENT RISK SCORES</div>
           <div className="dashboard__chart-body">
             <BarChart data={recentScores} />
           </div>
@@ -241,7 +241,7 @@ export function ThreatDashboard() {
 
       {/* Tag Cloud */}
       <div className="dashboard__chart-card" style={{ marginTop: 14 }}>
-        <div className="dashboard__chart-title">ANCAMAN TERATAS</div>
+        <div className="dashboard__chart-title">TOP THREATS</div>
         <div className="dashboard__chart-body">
           <TagCloud tags={topTags} />
         </div>
@@ -251,7 +251,7 @@ export function ThreatDashboard() {
       {history.length === 0 && (
         <div className="history-empty" style={{ marginTop: 32 }}>
           <span className="history-empty__icon">📊</span>
-          <p>Belum ada data. Jalankan scan untuk melihat dashboard.</p>
+          <p>No data yet. Run a scan to populate the dashboard.</p>
         </div>
       )}
 

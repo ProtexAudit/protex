@@ -31,11 +31,11 @@ export function ScreenshotScanner() {
 
   const handleFile = useCallback((file: File) => {
     if (!ACCEPTED.includes(file.type)) {
-      toast.error('Format tidak didukung. Gunakan JPG, PNG, atau WebP.')
+      toast.error('Unsupported format. Use JPG, PNG, or WebP.')
       return
     }
     if (file.size > MAX_SIZE) {
-      toast.error('Ukuran file maksimal 5MB.')
+      toast.error('File size limit is 5MB.')
       return
     }
     fileRef.current = file
@@ -75,14 +75,14 @@ export function ScreenshotScanner() {
       // Update global stats
       useProtexStore.getState().setResult('scam', res)
 
-      toast(`🔍 Scan selesai: ${res.riskLevel} RISK`, {
+      toast(`🔍 Scan complete: ${res.riskLevel} RISK`, {
         duration: 3000,
         style: { background: '#0E0E0E', color: '#F0EAD6', border: '1px solid rgba(201,168,76,0.3)' },
       })
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Unknown error'
       setError(msg)
-      toast.error(`Scan gagal: ${msg}`)
+      toast.error(`Scan failed: ${msg}`)
     } finally {
       setIsScanning(false)
     }
@@ -100,7 +100,7 @@ export function ScreenshotScanner() {
 
   return (
     <div className="screenshot-scanner">
-      <p className="sec-label">Upload screenshot untuk dianalisis</p>
+      <p className="sec-label">Upload screenshot for analysis</p>
 
       {/* Drop Zone */}
       {!preview && (
@@ -121,7 +121,7 @@ export function ScreenshotScanner() {
           />
           <div className="drop-zone__icon">📸</div>
           <div className="drop-zone__title">Drag & Drop Screenshot</div>
-          <div className="drop-zone__sub">atau klik untuk pilih file</div>
+          <div className="drop-zone__sub">or click to select file</div>
           <div className="drop-zone__hint">JPG, PNG, WebP · Maks 5MB</div>
         </motion.div>
       )}
@@ -137,7 +137,7 @@ export function ScreenshotScanner() {
           >
             <div className="screenshot-preview__header">
               <span className="screenshot-preview__name">📎 {fileName}</span>
-              <button className="screenshot-preview__remove" onClick={reset}>✕ Hapus</button>
+              <button className="screenshot-preview__remove" onClick={reset}>✕ Remove</button>
             </div>
             <img src={preview} alt="preview" className="screenshot-preview__img" />
           </motion.div>
@@ -152,7 +152,7 @@ export function ScreenshotScanner() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="extracted-text__label">TEKS YANG DIEKSTRAK</div>
+            <div className="extracted-text__label">EXTRACTED TEXT</div>
             <div className="extracted-text__content">{extractedText}</div>
           </motion.div>
         )}
@@ -170,7 +170,7 @@ export function ScreenshotScanner() {
             disabled={isScanning}
           >
             {isScanning ? <LoadingSpinner size={16} /> : null}
-            {isScanning ? 'MENGANALISIS...' : '📸 SCAN SCREENSHOT'}
+            {isScanning ? 'ANALYZING...' : '📸 SCAN SCREENSHOT'}
           </button>
         </div>
       )}
