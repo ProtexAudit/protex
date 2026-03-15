@@ -83,8 +83,8 @@ export default function App() {
 
       <footer className="app-footer">
         <span>PROTEX v1.1 · HACKATHON BUILD</span>
+        <span>BUILT ON HERMES-4-70B</span>
         <a href="https://x.com/protex_audit" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)', textDecoration: 'none', fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: 1 }}>🐦 @protex_audit</a>
-        <a href="https://protex-agent.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--ts)', textDecoration: 'none', fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: 1 }}>protex-agent.vercel.app</a>
       </footer>
     </div>
   )
